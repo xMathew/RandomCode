@@ -4,30 +4,12 @@ using namespace std;
 void printDiamond(int num); //prints out diamond by callng printRow to print each row
 void printRow(int mid, int row); //prints out a row of the diamond
 void printStar(int num, int row, int dir); //
+int askInput();
 
 int main()
 {
-	int num;
-	do
-	{
-		cout << "Enter an odd integer: ";
-		cin >> num;
-		if(cin.fail()) //checks the fail state to make sure the user entered an integer
-		{
-			cout << "Invalid input!" << endl;
-			cin.clear();
-			cin.ignore(100000,'\n');
-			continue;
-		}
-		if(num%2 == 0) //checks to make sure the number is odd
-		{
-			cout << "Not an odd number!" << endl;
-			continue;
-		}
-		printStar(num, num, 0); //calls the recursive function
-		break;
-	}
-	while(true);
+	int num = askInput();
+	printStar(num, num, 0); //calls the recursive function
 }
 
 void printDiamond(int num)
@@ -56,4 +38,28 @@ void printStar(int num, int row, int dir)
 	for(int i = 0;i < row;i++) cout << "*"; //prints out stars
 	cout << endl; //goes to next line
 	if(row-2 >= 1 && (dir == 0 || dir == 2)) printStar(num, row-2, 2); //calls itself for the row below the current row
+}
+
+int askInput()
+{
+	int num;
+	do
+	{
+		cout << "Enter an odd integer: ";
+		cin >> num;
+		if(cin.fail()) //checks the fail state to make sure the user entered an integer
+		{
+			cout << "Invalid input!" << endl;
+			cin.clear();
+			cin.ignore(100000,'\n');
+			continue;
+		}
+		if(num%2 == 0) //checks to make sure the number is odd
+		{
+			cout << "Not an odd number!" << endl;
+			continue;
+		}
+		return num;
+	}
+	while(true);
 }
